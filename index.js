@@ -3,6 +3,13 @@ const cors = require('cors')
 require('dotenv').config()
 const connectDB = require("./config/connectDB")
 const router = require('./router/index')
+const crypto = require("crypto")
+const cookiesParser = require("cookie-parser")
+
+// const secretKey = crypto.randomBytes(32).toString("hex");
+
+// console.log("Secret Key:", secretKey);
+
 
 
 const app = express()
@@ -10,6 +17,8 @@ app.use(cors({
     origin : process.env.FRONTEND_URL,
     credentials : true
 }))
+app.use(express.json())
+app.use(cookiesParser())
 
 const PORT = process.env.PORT || 8080
 
@@ -27,3 +36,4 @@ connectDB().then(()=>{
         console.log("server running at " + PORT)
     })
 })
+
