@@ -1,21 +1,21 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
-async function connectDB() {
+async function connectDB(){
     try {
-        await mongoose.connect(process.env.MONGODB_URL);
+        await mongoose.connect(process.env.MONGODB_URI)
 
-        const connection = mongoose.connection;
+        const connection = mongoose.connection
 
-        connection.on("connected", () => {
-            console.log("Connected to DB");
-        });
+        connection.on('connected',()=>{
+            console.log("Connect to DB")
+        })
 
-        connection.on("error", (error) => {
-            console.log("Something is wrong in MongoDB", error);
-        });
+        connection.on('error',(error)=>{
+            console.log("Something is wrong in mongodb ",error)
+        })
     } catch (error) {
-        console.log("Something is wrong", error);
+        console.log("Something is wrong ",error)
     }
 }
 
-module.exports = connectDB;
+module.exports = connectDB
